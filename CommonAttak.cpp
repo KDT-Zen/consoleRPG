@@ -9,7 +9,7 @@
 //　引数に与える相手のHPの変数を渡す
 int CommonAttak::player_attak() {
 	
-	int player_atk = rand() % (20 - 10 + 1) + 10; // 10〜20の乱数           
+	int player_atk = rand() % (20 - 10 + 1) + 10; // 10〜20の乱数          
 	
 
 	//　player_atpを返す
