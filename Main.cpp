@@ -6,8 +6,6 @@
 #include "CommonAttak.h"
 
 
-
-
 using namespace std;
 
 
@@ -30,17 +28,11 @@ char attak_key;
 //　プレイヤーのHP
 int player_hp;
 
-int all_player_hp;
-
-
-int all_enemy_hp;
-
 //　エネミーのHP
 int enemy_hp;
 
-
+//　与えるダメージを保持する
 int player_atk;
-
 
 int enemy_atk;
 
@@ -87,29 +79,30 @@ int main()
 
         cout << "ENEMY_HP :" << enemy_hp << endl;
 
-
         cout << "bで攻撃" << endl;
 
         //　攻撃開始のキー入力の受け付け
         cin >> attak_key;
 
         //　キーが正しく入力されていたら
-        if (attak_key == 'b') {
+        while (player_hp >= 0 || enemy_hp >= 0) {
+            if (attak_key == 'b') {
 
-            //attakクラスにある攻撃関数を呼び出す
-           player_atk =  attak.player_attak();
-            enemy_atk = attak.enemy_attak();
+                //attakクラスにある攻撃関数を呼び出す
+                player_atk = attak.player_attak();
+                enemy_atk = attak.enemy_attak();
 
+                //各HPからダメージを引く
+                enemy_hp = enemy_hp - player_atk;
 
-            all_enemy_hp = player_atk - enemy_hp;
-
-            all_player_hp = enemy_atk - player_hp;
-
-
-            //　攻撃されたあとのお互いのHPの描画
-            cout << "互いの攻撃!  NPC残りHP :" << all_player_hp << "  PLYAER残りHP :" << all_enemy_hp << endl;
+                player_hp = player_hp - enemy_atk;
 
 
+                //　攻撃されたあとのお互いのHPの描画
+                cout << "互いの攻撃!  NPC残りHP :" << player_hp << "  PLYAER残りHP :" << enemy_hp << endl;
+
+
+            }
         }
 
         //　敵のHPが０になったらプレイヤー勝利
